@@ -7,8 +7,8 @@ import asyncio
 api_id = 20225004
 api_hash = "8f4c78e858658cd2aa21967a087bf819"
 phone_number = "+5519971432718"
-canal_origem = "https://t.me/+9sh5Is4Ytt5hMzYx"
-canal_destino = "https://t.me/+pHVeR_oSuldmMzFh"
+canal_origem = "https://t.me/+XkWYvpDc2-c5ZGQ5"
+canal_destino = "https://t.me/+RDbY2XIDf-kyNDlh"
 
 client = TelegramClient('sessao_usuario', api_id, api_hash)
 
