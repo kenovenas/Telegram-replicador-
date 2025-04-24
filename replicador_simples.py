@@ -1,4 +1,5 @@
 import re
+import asyncio
 from telethon.sync import TelegramClient, events
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
@@ -29,6 +30,10 @@ def entrar_por_link(client, link, tipo):
     return client.get_entity(link)
 
 def iniciar_replicador():
+    # CORREÇÃO: cria e define o event loop na thread
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
     client = TelegramClient(SESSAO, api_id, api_hash)
     client.start()
     print("[LOG] Sessão iniciada.")
