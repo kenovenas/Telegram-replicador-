@@ -1,4 +1,3 @@
-
 from flask import Flask
 import asyncio
 import threading
@@ -9,12 +8,16 @@ app = Flask(__name__)
 loop = asyncio.new_event_loop()
 
 def start_bot():
-    asyncio.set_event_loop(loop)
-    with client:
-        loop.run_until_complete(main())
+    try:
+        asyncio.set_event_loop(loop)
+        with client:
+            loop.run_until_complete(main())
+    except Exception as e:
+        print("Erro ao iniciar o bot:", e)
 
 @app.before_first_request
 def activate_bot():
+    print("Ativando bot em segundo plano...")
     thread = threading.Thread(target=start_bot)
     thread.start()
 
