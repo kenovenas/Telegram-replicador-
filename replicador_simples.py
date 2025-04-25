@@ -7,8 +7,8 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 api_id = 20225004
 api_hash = "8f4c78e858658cd2aa21967a087bf819"
 SESSAO = 'sessao_usuario'
-LINK_ORIG = 'https://t.me/+qBGna2cSfSI1ZWQx'
-LINK_DEST = 'https://t.me/+_Hxtjou7Kl1lZDMx'
+LINK_ORIG = 'https://t.me/+XkWYvpDc2-c5ZGQ5'
+LINK_DEST = 'https://t.me/+RDbY2XIDf-kyNDlh'
 
 def extrair_hash(link):
     match = re.search(r't\.me/\+([a-zA-Z0-9_-]+)', link)
@@ -30,7 +30,7 @@ def entrar_por_link(client, link, tipo):
     return client.get_entity(link)
 
 def iniciar_replicador():
-    # CORREÇÃO: cria e define o event loop na thread
+    # Correção: criar e ativar o event loop para threads no Render
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
@@ -50,11 +50,19 @@ def iniciar_replicador():
 
     @client.on(events.NewMessage(chats=origem))
     async def handler(event):
-        texto = event.message.text or "<sem texto>"
+        mensagem = event.message
+
+        # Ignorar mensagens com mídia (fotos, vídeos, arquivos, etc.)
+        if mensagem.media:
+            print("[IGNORADO] Mensagem contém mídia. Não será replicada.")
+            return
+
+        texto = mensagem.text or "<sem texto>"
         print(f"[RECEBIDO] {texto}")
+
         try:
-            await client.send_message(destino, event.message)
-            print("[ENVIADO] Mensagem replicada com sucesso.")
+            await client.send_message(destino, texto)
+            print("[ENVIADO] Texto replicado com sucesso.")
         except Exception as e:
             print(f"[ERRO] Falha ao enviar mensagem: {e}")
 
