@@ -8,7 +8,7 @@ api_id = 20225004
 api_hash = "8f4c78e858658cd2aa21967a087bf819"
 SESSAO = 'sessao_usuario'
 LINK_ORIG = 'https://t.me/+qBGna2cSfSI1ZWQx'
-LINK_DEST = 'https://t.me/+RDbY2XIDf-kyNDlh'
+LINK_DEST = 'https://t.me/+_Hxtjou7Kl1lZDMx'
 
 def extrair_hash(link):
     match = re.search(r't\.me/\+([a-zA-Z0-9_-]+)', link)
